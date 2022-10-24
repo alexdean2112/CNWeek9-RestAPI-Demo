@@ -29,8 +29,8 @@ exports.readUsers = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
-        const updatedUser = await User.updateOne(req.body.filter, {$set: req.body.update});
-        res.status(200).send({user: updatedUser});
+        await User.updateOne(req.body.filter, {$set: req.body.update});
+        res.status(200).send({previousUser: req.body.filter, newUser: req.body.update });
     }
     catch (error) {
         console.log(error);
@@ -40,8 +40,8 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
     try {
-        const oldUser = await User.deleteOne(req.body);
-        res.status(200).send({user: oldUser});
+        await User.deleteOne(req.body);
+        res.status(200).send({deletedUser: req.body});
     }
     catch (error) {
         console.log(error);
