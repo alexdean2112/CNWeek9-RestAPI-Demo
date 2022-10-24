@@ -1,6 +1,6 @@
 // <------- Imports ------->
-require("dotenv").config()
-const mongoose = require("mongoose")
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 // <------- Connection Function ------->
 const connection = async () => {
@@ -11,6 +11,6 @@ const connection = async () => {
     catch (error) {
         console.log(error)
     }
-}
+};
 
-connection()
+connection();
