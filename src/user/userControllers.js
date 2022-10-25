@@ -1,13 +1,15 @@
 // <------- Imports ------->
 
 const User = require("./userModel");
+const jwt = require("jsonwebtoken");
 
 // <------- Controllers ------->
 
 exports.createUser = async (req, res) => {
     try {
         const newUser = await User.create(req.body);
-        res.status(200).send({user: newUser});
+        const token = await jwt.sign({_id: newUser._id}, process.env.SECRET);
+        res.status(200).send({user: newUser, token});
     }
     catch (error) {
         console.log(error);
@@ -51,8 +53,8 @@ exports.deleteUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     try {
-        const user = await User.findByCredentials(req.body.username, req.body.password)
-        res.status(200).send({user: user.username})
+        const token = await jwt.sign({_id: req.user._id}, process.env.SECRET);
+        res.status(200).send({user: req.user.username, token, message: "Successfully logged in"});
     }
     catch (error) {
         console.log(error);
