@@ -1,6 +1,7 @@
 // <------- Imports ------->
 
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt")
 
 // <------- User Model ------->
 
@@ -21,6 +22,16 @@ const userSchema = new mongoose.Schema({
         required: true,
     }
 });
+
+userSchema.statics.findByCredentials = async (username, password) => {
+    const user = await User.findOne({username})
+    if (user && await bcrypt.compare(password, user.password)) {
+        return user
+    }
+    else {
+        throw new Error ()
+    }
+}
 
 const User = mongoose.model("User", userSchema);
 
