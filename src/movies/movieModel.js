@@ -1,30 +1,27 @@
 // <------- Imports ------->
 
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt")
 
 // <------- User Model ------->
 
 const userSchema = new mongoose.Schema({
-    username: {
+    title: {
         type: String,
         required: true,
         unique: true,
     },
-    email: {
+    lead_actor: {
         type: String,
-        required: true,
-        unique: true,
-        match: /.+\@.+\..+/,
+        default: "Not Specififed"
     },
-    password: {
+    director: {
         type: String,
-        required: true,
+        default: "Not Specififed"
     }
 });
 
-const User = mongoose.model("User", userSchema);
+const Movie = mongoose.model("Movie", userSchema);
 
 // <------- Exports ------->
 
-module.exports = User;
+module.exports = Movie;

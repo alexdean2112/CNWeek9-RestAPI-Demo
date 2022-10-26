@@ -41,6 +41,7 @@ exports.comparePassword = async ( req, res, next) => {
         else {
             throw new Error ("Incorrect user ID or password")
         }
+        next()
     }
     catch (error) {
         console.log(error)
