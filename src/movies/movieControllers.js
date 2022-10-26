@@ -1,7 +1,6 @@
 // <------- Imports ------->
 
 const Movie = require("./movieModel");
-const jwt = require("jsonwebtoken");
 
 // <------- Controllers ------->
 
